@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>Python-Bot</title>
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ <style>
+ h1 {
+  font-size: 70px;
+ }
+
+ * {
+  background-color: whitesmoke;
+ box-sizing: border-box
+ }/* Set height of body and the document to 100% */
+ body, html {
+ height: 100%;
+ margin: 0;
+ font-family: Arial;
+ }
+ #chatbox {
+ margin-left: auto;
+ margin-right: auto;
+ width: 40%;
+ margin-top: 60px;
+ }
+ #userInput {
+ margin-left: auto;
+ margin-right: auto;
+ width: 40%;
+ margin-top: 60px;
+ }
+ #textInput {
+ width: 90%;
+ margin-top: 40%;
+ border: none;
+ border-bottom: 3px solid rgb(8, 54, 54);
+ font-family: monospace;
+ font-size: 17px;
+ margin-bottom: 10px;
+ background-color: rgb(31, 78, 78);
+ color: whitesmoke;
+ }
+ .userText {   
+ color: black;
+ font-family: monospace;
+ font-size: 17px;
+ text-align: right;
+ line-height: 30px;
+ }
+ .userText span {
+ background-color: #078282FF;
+ padding: 10px;
+ border-radius: 4px;
+ }
+ .botText {
+ color: black;
+ font-family: monospace;
+ font-size: 17px;
+ text-align: left;
+ line-height: 30px;
+ }
+ .botText span {
+ background-color:#339E66FF;
+ padding: 10px;
+ border-radius: 4px;
+ }
+ #tidbit {
+ position: absolute;
+ bottom: 0;
+ right: 0;
+ width: 300px;
+ }
+ .boxed {
+ margin-left: auto;
+ margin-right: auto;
+ width: 70%;
+ margin-top: 40px;
+ margin-bottom: 20px;
+ border: 3px solid black;
+ border-radius: 8px;
+ }
+ img {
+  border-radius: 0%;
+  /* border: 5px solid rgb(31, 78, 78);*/
+ }
+
+ .row {
+  display: flex;
+}
+
+.column {
+  flex: 20%;
+  padding: 5px;
+}
+@media screen and (max-width: 500px) {
+  .column {
+    width: 100%;
+  }
+
+  
+}
+ </style>
+</head>
+<body><div>
+ <h1 align="center"><b><span style="color: #078282FF">M<span style="color: #ADEFD1FF"><i>O</span>vie</span><span style="color: #339E66FF">Time</span></i></b></h1>  
+ <p align="center"><img src="https://www.pngitem.com/pimgs/m/500-5002858_chatbot-icon-chatbot-icon-transparent-background-hd-png.png" alt="Call-BOT" height="210" width="300" ></p>
+ <div class="boxed">
+ <div>
+ <div id="chatbox">
+ <p class="botText">
+
+ </p>
+ </div>
+ <div id="userInput">
+ <input id="textInput" type="text" name="msg" placeholder="type here" />
+ </div>
+ </div>
+ <script>
+ function getBotResponse() {
+ var rawText = $("#textInput").val();
+ var userHtml = '<p class="userText"><span>' + rawText + "</span></p>";
+ $("#textInput").val("");
+ $("#chatbox").append(userHtml);
+ document
+ .getElementById("userInput")
+ .scrollIntoView({ block: "start", behavior: "smooth" });
+ $.get("/get", { msg: rawText }).done(function (data) {
+ var botHtml = '<p class="botText"><span>' + data + "</span></p>";
+ $("#chatbox").append(botHtml);
+ document
+ .getElementById("userInput")
+ .scrollIntoView({ block: "start", behavior: "smooth" });
+ });
+ }
+ $("#textInput").keypress(function (e) {
+ if (e.which == 13) {
+ getBotResponse();
+ }
+ });
+ </script>
+ </div>
+  <!--<div class="row">
+    <div class="column">
+      <img src="https://i0.wp.com/designedtours.com/wp-content/uploads/2018/03/Harry-Potter-1.jpg?fit=1024536" alt="harry potter" style="width:100%" height="300">
+    </div>
+    <div class="column">
+      <img src="https://www.tasteofcinema.com/wp-content/uploads/2018/02/La-La-Land-04-1_.jpg" alt="lala land" style="width:100%" height="300">
+    </div>
+    <div class="column">
+      <img src="https://www.maxim.com/.image/t_share/MTU0NTA2MzM3NzMwOTYyNDgy/john-wick-club-scene-screengrab.jpg" alt="john wick" style="width:100%" height="300">
+    </div>
+    <div class="column">
+      <img src="https://stmedia.stimg.co/ows_157382517592940.jpg?fit=crop&crop=faces" alt="joker" style="width:100%" height="300">
+    </div>
+    <div class="column">
+      <img src="https://img.mensxp.com/media/content/2018/Apr/header-3-copy-1525018941_1400x653.jpg" alt="avengers" style="width:100%" height="300">
+    </div>
+  </div> -->
+ <h4 align="center">A movie recommendation chatbot</h4>
+ <h4 align="center">Developed by <span style="color:  #078282FF">Runetime Terrors</span> team</h4>
+ </div>
+</body>
+</html>
